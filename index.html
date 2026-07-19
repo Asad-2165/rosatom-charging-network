@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Росатом СЗС — Оптимизация сети зарядных станций</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+    <!-- Canvas для анимированных частиц -->
+    <canvas id="particleCanvas"></canvas>
+    
+    <!-- Навигация -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#hero" class="nav-logo">
+                <div class="logo-atom">
+                    <div class="orbit"></div>
+                    <div class="orbit orbit-2"></div>
+                    <div class="nucleus"></div>
+                </div>
+                <span class="logo-text">Росатом <span class="logo-accent">СЗС</span></span>
+            </a>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#problem" class="nav-link">Проблема</a></li>
+                <li><a href="#solution" class="nav-link">Решение</a></li>
+                <li><a href="#dashboard" class="nav-link">Дашборд</a></li>
+                <li><a href="#calculator" class="nav-link">ROI Калькулятор</a></li>
+                <li><a href="#map" class="nav-link">Карта</a></li>
+                <li><a href="#team" class="nav-link">Команда</a></li>
+            </ul>
+            <div class="nav-toggle" id="navToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero">
+        <div class="hero-content">
+            <div class="hero-badge">
+                <span class="badge-dot"></span>
+                <span>Проект команды Brainstormers · ТашГЭУ</span>
+            </div>
+            <h1 class="hero-title">
+                <span class="title-line">Интеллектуальная</span>
+                <span class="title-line highlight">оптимизация сети</span>
+                <span class="title-line">зарядных станций</span>
+            </h1>
+            <p class="hero-subtitle">
+                AI-модель для расчёта оптимального размещения ЭЗС на основе 
+                транспортного спроса, ограничений энергосети и прогноза рынка
+            </p>
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <span class="stat-number" data-target="290">0</span>
+                    <span class="stat-label">Станций сейчас</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" data-target="16">0</span>
+                    <span class="stat-label">Регионов</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" data-target="67">0</span>
+                    <span class="stat-suffix">%</span>
+                    <span class="stat-label">Целевая загрузка</span>
+                </div>
+            </div>
+            <div class="hero-cta">
+                <a href="#dashboard" class="btn btn-primary">
+                    <i class="fas fa-rocket"></i>
+                    <span>Запустить модель</span>
+                </a>
+                <a href="#problem" class="btn btn-secondary">
+                    <i class="fas fa-arrow-down"></i>
+                    <span>Узнать больше</span>
+                </a>
+            </div>
+        </div>
+        <div class="hero-scroll">
+            <div class="scroll-indicator">
+                <div class="scroll-mouse">
+                    <div class="scroll-wheel"></div>
+                </div>
+                <span>Листайте вниз</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem Section -->
+    <section id="problem" class="problem-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">01 / Проблема</span>
+                <h2 class="section-title">Почему текущая сеть<br><span class="gradient-text">неэффективна</span></h2>
+            </div>
+            
+            <div class="problem-grid">
+                <div class="problem-card glass" data-aos="fade-up">
+                    <div class="card-icon">
+                        <i class="fas fa-eye-slash"></i>
+                    </div>
+                    <h3>Эмпирический выбор</h3>
+                    <p>Размещение станций опирается на интуицию: ТЦ, магистрали, деловые кластеры — без системного анализа данных.</p>
+                    <div class="card-metric">
+                        <span class="metric-value">22%</span>
+                        <span class="metric-label">Средняя загрузка</span>
+                    </div>
+                </div>
+                
+                <div class="problem-card glass" data-aos="fade-up" data-aos-delay="100">
+                    <div class="card-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3>Очереди и простои</h3>
+                    <p>Часть станций недостаточно загружена, в других точках формируются очереди. Таксопарки теряют 12–18% дохода.</p>
+                    <div class="card-metric">
+                        <span class="metric-value">35-50</span>
+                        <span class="metric-label">Минут ожидания</span>
+                    </div>
+                </div>
+                
+                <div class="problem-card glass" data-aos="fade-up" data-aos-delay="200">
+                    <div class="card-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3>Энергосетевые ограничения</h3>
+                    <p>18% заявленных точек отклоняется на техаудите из-за недостатка мощности ТП или расстояния до сети.</p>
+                    <div class="card-metric">
+                        <span class="metric-value">18%</span>
+                        <span class="metric-label">Отказов на аудите</span>
+                    </div>
+                </div>
+                
+                <div class="problem-card glass" data-aos="fade-up" data-aos-delay="300">
+                    <div class="card-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Нет прогноза рынка</h3>
+                    <p>Отсутствие модели, учитывающей сценарии роста рынка ЭТС. К 2030 потребуется в 15× больше станций.</p>
+                    <div class="card-metric">
+                        <span class="metric-value">15×</span>
+                        <span class="metric-label">Рост необходим</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="problem-quote glass">
+                <i class="fas fa-quote-left quote-icon"></i>
+                <blockquote>
+                    «Нет модели прогноза загрузки. Размещение — по экспертизе, не по данным.»
+                </blockquote>
+                <cite>— Менеджер по развитию сети РСЗС</cite>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solution Section -->
+    <section id="solution" class="solution-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">02 / Решение</span>
+                <h2 class="section-title">AI-модель <span class="gradient-text">оптимального размещения</span></h2>
+            </div>
+
+            <div class="solution-showcase">
+                <div class="solution-visual">
+                    <div class="orbit-system">
+                        <div class="center-core">
+                            <i class="fas fa-brain"></i>
+                            <span>AI Core</span>
+                        </div>
+                        <div class="orbit-ring ring-1">
+                            <div class="orbit-node" data-label="Транспортный спрос">
+                                <i class="fas fa-car"></i>
+                            </div>
+                        </div>
+                        <div class="orbit-ring ring-2">
+                            <div class="orbit-node" data-label="Энергосеть">
+                                <i class="fas fa-bolt"></i>
+                            </div>
+                        </div>
+                        <div class="orbit-ring ring-3">
+                            <div class="orbit-node" data-label="Прогноз рынка">
+                                <i class="fas fa-chart-area"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="solution-features">
+                    <div class="feature-item" data-aos="fade-left">
+                        <div class="feature-num">01</div>
+                        <div class="feature-content">
+                            <h3>Анализ транспортных потоков</h3>
+                            <p>Big Data + GIS-картография + машинное обучение для определения зон с высоким спросом на зарядку.</p>
+                        </div>
+                    </div>
+                    <div class="feature-item" data-aos="fade-left" data-aos-delay="100">
+                        <div class="feature-num">02</div>
+                        <div class="feature-content">
+                            <h3>Проверка энергосети</h3>
+                            <p>Автоматическая верификация мощности ТП и расстояния до сети до начала строительства.</p>
+                        </div>
+                    </div>
+                    <div class="feature-item" data-aos="fade-left" data-aos-delay="200">
+                        <div class="feature-num">03</div>
+                        <div class="feature-content">
+                            <h3>Прогнозирование спроса</h3>
+                            <p>Сценарии роста рынка ЭТС на 3–5 лет с учётом региональных особенностей.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="impact-grid">
+                <div class="impact-card">
+                    <div class="impact-chart" id="impactChart1"></div>
+                    <div class="impact-info">
+                        <span class="impact-value">22% → 67%</span>
+                        <span class="impact-label">Рост загрузки станций</span>
+                    </div>
+                </div>
+                <div class="impact-card">
+                    <div class="impact-chart" id="impactChart2"></div>
+                    <div class="impact-info">
+                        <span class="impact-value">18% → 3%</span>
+                        <span class="impact-label">Снижение отказов</span>
+                    </div>
+                </div>
+                <div class="impact-card">
+                    <div class="impact-chart" id="impactChart3"></div>
+                    <div class="impact-info">
+                        <span class="impact-value">8-14 → 3-5 мес</span>
+                        <span class="impact-label">Ускорение запуска</span>
+                    </div>
+                </div>
+                <div class="impact-card">
+                    <div class="impact-chart" id="impactChart4"></div>
+                    <div class="impact-info">
+                        <span class="impact-value">3.2±0.5 лет</span>
+                        <span class="impact-label">Точный срок окупаемости</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dashboard Section -->
+    <section id="dashboard" class="dashboard-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">03 / Дашборд</span>
+                <h2 class="section-title">Интерактивная <span class="gradient-text">панель управления</span></h2>
+            </div>
+
+            <div class="dashboard-grid">
+                <!-- Левая панель: параметры -->
+                <div class="dashboard-panel glass">
+                    <h3 class="panel-title"><i class="fas fa-sliders-h"></i> Параметры модели</h3>
+                    
+                    <div class="control-group">
+                        <label>Регион</label>
+                        <select id="regionSelect" class="control-select">
+                            <option value="moscow">Москва</option>
+                            <option value="spb">Санкт-Петербург</option>
+                            <option value="ekb">Екатеринбург</option>
+                            <option value="sochi">Сочи</option>
+                            <option value="kazan">Казань</option>
+                        </select>
+                    </div>
+
+                    <div class="control-group">
+                        <label>Тип локации</label>
+                        <div class="control-chips">
+                            <button class="chip active" data-type="all">Все</button>
+                            <button class="chip" data-type="tc">ТЦ</button>
+                            <button class="chip" data-type="highway">Магистрали</button>
+                            <button class="chip" data-type="business">Бизнес-кластеры</button>
+                            <button class="chip" data-type="residential">Жилые районы</button>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label>Мощность станции (кВт)</label>
+                        <div class="range-slider">
+                            <input type="range" id="powerRange" min="50" max="350" value="150">
+                            <div class="range-value"><span id="powerValue">150</span> кВт</div>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label>Прогнозный период</label>
+                        <div class="range-slider">
+                            <input type="range" id="forecastRange" min="1" max="5" value="3">
+                            <div class="range-value"><span id="forecastValue">3</span> года</div>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label>Количество коннекторов</label>
+                        <div class="range-slider">
+                            <input type="range" id="connectorsRange" min="1" max="8" value="4">
+                            <div class="range-value"><span id="connectorsValue">4</span> шт</div>
+                        </div>
+                    </div>
+
+                    <button id="runModel" class="btn btn-primary btn-full">
+                        <i class="fas fa-play"></i>
+                        <span>Запустить расчёт</span>
+                    </button>
+                </div>
+
+                <!-- Центральная панель: результаты -->
+                <div class="dashboard-center">
+                    <div class="result-cards">
+                        <div class="result-card glass">
+                            <div class="result-icon"><i class="fas fa-battery-three-quarters"></i></div>
+                            <div class="result-data">
+                                <span class="result-value" id="predictedLoad">—</span>
+                                <span class="result-label">Прогноз загрузки</span>
+                            </div>
+                        </div>
+                        <div class="result-card glass">
+                            <div class="result-icon"><i class="fas fa-ruble-sign"></i></div>
+                            <div class="result-data">
+                                <span class="result-value" id="predictedRevenue">—</span>
+                                <span class="result-label">Выручка/мес</span>
+                            </div>
+                        </div>
+                        <div class="result-card glass">
+                            <div class="result-icon"><i class="fas fa-calendar-check"></i></div>
+                            <div class="result-data">
+                                <span class="result-value" id="predictedPayback">—</span>
+                                <span class="result-label">Срок окупаемости</span>
+                            </div>
+                        </div>
+                        <div class="result-card glass">
+                            <div class="result-icon"><i class="fas fa-star"></i></div>
+                            <div class="result-data">
+                                <span class="result-value" id="locationScore">—</span>
+                                <span class="result-label">Оценка локации</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="chart-container glass">
+                        <h3 class="panel-title"><i class="fas fa-chart-bar"></i> Прогноз загрузки по часам</h3>
+                        <canvas id="loadChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Правая панель: топ локаций -->
+                <div class="dashboard-panel glass">
+                    <h3 class="panel-title"><i class="fas fa-trophy"></i> Топ локаций</h3>
+                    <div class="locations-list" id="locationsList">
+                        <div class="location-placeholder">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <p>Запустите расчёт для получения рекомендаций</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Calculator Section -->
+    <section id="calculator" class="calculator-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">04 / Калькулятор</span>
+                <h2 class="section-title">Калькулятор <span class="gradient-text">ROI для инвесторов</span></h2>
+            </div>
+
+            <div class="calc-wrapper">
+                <div class="calc-inputs glass">
+                    <h3 class="panel-title"><i class="fas fa-calculator"></i> Входные данные</h3>
+                    
+                    <div class="calc-group">
+                        <label>Стоимость станции (руб.)</label>
+                        <input type="number" id="calcStationCost" value="3500000" class="calc-input">
+                    </div>
+                    
+                    <div class="calc-group">
+                        <label>Мощность (кВт)</label>
+                        <input type="number" id="calcPower" value="150" class="calc-input">
+                    </div>
+                    
+                    <div class="calc-group">
+                        <label>Количество коннекторов</label>
+                        <input type="number" id="calcConnectors" value="4" class="calc-input">
+                    </div>
+                    
+                    <div class="calc-group">
+                        <label>Цена за кВт·ч (руб.)</label>
+                        <input type="number" id="calcPrice" value="18" class="calc-input">
+                    </div>
+                    
+                    <div class="calc-group">
+                        <label>Средняя зарядка (кВт·ч)</label>
+                        <input type="number" id="calcAvgCharge" value="35" class="calc-input">
+                    </div>
+                    
+                    <div class="calc-group">
+                        <label>Сессий в день (на коннектор)</label>
+                        <input type="number" id="calcSessions" value="8" class="calc-input">
+                    </div>
+                    
+                    <div class="calc-group">
+                        <label>Операционные расходы/мес (руб.)</label>
+                        <input type="number" id="calcOpex" value="85000" class="calc-input">
+                    </div>
+
+                    <button id="calcROI" class="btn btn-primary btn-full">
+                        <i class="fas fa-chart-pie"></i>
+                        <span>Рассчитать ROI</span>
+                    </button>
+                </div>
+
+                <div class="calc-results">
+                    <div class="result-main glass">
+                        <div class="roi-circle">
+                            <svg viewBox="0 0 200 200">
+                                <circle class="roi-bg" cx="100" cy="100" r="85"/>
+                                <circle class="roi-progress" id="roiCircle" cx="100" cy="100" r="85"/>
+                            </svg>
+                            <div class="roi-text">
+                                <span class="roi-value" id="roiYears">—</span>
+                                <span class="roi-label">лет окупаемости</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="result-details">
+                        <div class="detail-card glass">
+                            <i class="fas fa-coins"></i>
+                            <span class="detail-value" id="monthlyRevenue">—</span>
+                            <span class="detail-label">Выручка/мес</span>
+                        </div>
+                        <div class="detail-card glass">
+                            <i class="fas fa-wallet"></i>
+                            <span class="detail-value" id="monthlyProfit">—</span>
+                            <span class="detail-label">Прибыль/мес</span>
+                        </div>
+                        <div class="detail-card glass">
+                            <i class="fas fa-percentage"></i>
+                            <span class="detail-value" id="annualROI">—</span>
+                            <span class="detail-label">Годовая доходность</span>
+                        </div>
+                        <div class="detail-card glass">
+                            <i class="fas fa-bolt"></i>
+                            <span class="detail-value" id="dailyEnergy">—</span>
+                            <span class="detail-label">кВт·ч/день</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Map Section -->
+    <section id="map" class="map-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">05 / Карта</span>
+                <h2 class="section-title">Карта <span class="gradient-text">приоритетных локаций</span></h2>
+            </div>
+
+            <div class="map-container glass">
+                <div class="map-controls">
+                    <button class="map-filter active" data-filter="all">Все точки</button>
+                    <button class="map-filter" data-filter="high">Высокий приоритет</button>
+                    <button class="map-filter" data-filter="medium">Средний приоритет</button>
+                    <button class="map-filter" data-filter="low">Низкий приоритет</button>
+                </div>
+                <div class="map-visual" id="mapVisual">
+                    <canvas id="mapCanvas"></canvas>
+                    <div class="map-legend">
+                        <div class="legend-item">
+                            <span class="legend-dot high"></span>
+                            <span>Высокий приоритет</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-dot medium"></span>
+                            <span>Средний приоритет</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-dot low"></span>
+                            <span>Низкий приоритет</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-dot existing"></span>
+                            <span>Существующие станции</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="map-info" id="mapInfo">
+                    <p class="map-hint">Наведите на точку для деталей</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Timeline Section -->
+    <section id="timeline" class="timeline-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">06 / План работ</span>
+                <h2 class="section-title">Дорожная <span class="gradient-text">карта проекта</span></h2>
+            </div>
+
+            <div class="timeline">
+                <div class="timeline-line"></div>
+                
+                <div class="timeline-item" data-aos="fade-up">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content glass">
+                        <span class="timeline-week">Неделя 1</span>
+                        <h3>Анализ проблемы</h3>
+                        <p>Изучение сети РСЗС, сбор данных о текущем размещении 290 станций</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item" data-aos="fade-up">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content glass">
+                        <span class="timeline-week">Неделя 1–2</span>
+                        <h3>Определение факторов</h3>
+                        <p>Транспортный спрос, ограничения энергосети, сценарии роста рынка</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item" data-aos="fade-up">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content glass">
+                        <span class="timeline-week">Неделя 2</span>
+                        <h3>Методология</h3>
+                        <p>Разработка функции-конструкции: цель, интерфейсы, декомпозиция</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item" data-aos="fade-up">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content glass">
+                        <span class="timeline-week">Неделя 3</span>
+                        <h3>Сбор данных</h3>
+                        <p>ГИС-слои, трафик, точки подключения к энергосети</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item" data-aos="fade-up">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content glass">
+                        <span class="timeline-week">Неделя 3–4</span>
+                        <h3>Алгоритм</h3>
+                        <p>Разработка алгоритма оптимального размещения на основе трёх факторов</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item" data-aos="fade-up">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content glass">
+                        <span class="timeline-week">Неделя 4–5</span>
+                        <h3>Пилотное тестирование</h3>
+                        <p>Тест модели на кластере Москвы, сверка с реальной загрузкой</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item" data-aos="fade-up">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content glass">
+                        <span class="timeline-week">Неделя 5</span>
+                        <h3>Прототип</h3>
+                        <p>Карта приоритетных локаций и дашборд визуализации</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item" data-aos="fade-up">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content glass">
+                        <span class="timeline-week">Неделя 6</span>
+                        <h3>Финал</h3>
+                        <p>Презентация, документация, защита проекта</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section id="team" class="team-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">07 / Команда</span>
+                <h2 class="section-title">Brainstormers <span class="gradient-text">· ТашГЭУ</span></h2>
+            </div>
+
+            <div class="team-grid">
+                <div class="team-card glass" data-aos="fade-up">
+                    <div class="team-avatar">
+                        <div class="avatar-ring"></div>
+                        <div class="avatar-inner">
+                            <i class="fas fa-user"></i>
+                        </div>
+                    </div>
+                    <h3>Муродилов Асадбек</h3>
+                    <p>Аналитик данных</p>
+                    <div class="team-social">
+                        <a href="#"><i class="fab fa-telegram"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                
+                <div class="team-card glass" data-aos="fade-up" data-aos-delay="100">
+                    <div class="team-avatar">
+                        <div class="avatar-ring"></div>
+                        <div class="avatar-inner">
+                            <i class="fas fa-user"></i>
+                        </div>
+                    </div>
+                    <h3>Турсунов Султонбек</h3>
+                    <p>Разработчик модели</p>
+                    <div class="team-social">
+                        <a href="#"><i class="fab fa-telegram"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                
+                <div class="team-card glass" data-aos="fade-up" data-aos-delay="200">
+                    <div class="team-avatar">
+                        <div class="avatar-ring"></div>
+                        <div class="avatar-inner">
+                            <i class="fas fa-user"></i>
+                        </div>
+                    </div>
+                    <h3>Нишонова Фарангиз</h3>
+                    <p>UX/UI дизайнер</p>
+                    <div class="team-social">
+                        <a href="#"><i class="fab fa-telegram"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="team-org glass">
+                <i class="fas fa-university"></i>
+                <span>Ташкентский Государственный Экономический Университет</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="footer-logo">
+                        <div class="logo-atom small">
+                            <div class="orbit"></div>
+                            <div class="nucleus"></div>
+                        </div>
+                        <span>Росатом СЗС</span>
+                    </div>
+                    <p>Интеллектуальная оптимизация сети зарядных станций на основе AI и Big Data</p>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Навигация</h4>
+                    <a href="#problem">Проблема</a>
+                    <a href="#solution">Решение</a>
+                    <a href="#dashboard">Дашборд</a>
+                    <a href="#calculator">Калькулятор</a>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Ресурсы</h4>
+                    <a href="#map">Карта</a>
+                    <a href="#timeline">План работ</a>
+                    <a href="#team">Команда</a>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Контакты</h4>
+                    <a href="mailto:brainstormers@tashieu.uz"><i class="fas fa-envelope"></i> brainstormers@tashieu.uz</a>
+                    <a href="#"><i class="fas fa-map-marker-alt"></i> Ташкент, Узбекистан</a>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>© 2026 Brainstormers · ТашГЭУ. Все права защищены.</p>
+                <p>Создано для конкурса Росатом</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/particles.js"></script>
+    <script src="js/dashboard.js"></script>
+    <script src="js/calculator.js"></script>
+    <script src="js/map.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
